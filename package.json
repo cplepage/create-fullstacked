@@ -1,6 +1,6 @@
 {
   "name": "create-fullstacked",
-  "version": "0.0.0-alpha.5",
+  "version": "0.0.1",
   "description": "Create FullStacked Project",
   "bin": "index.js",
   "repository": {
