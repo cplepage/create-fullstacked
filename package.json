@@ -1,0 +1,16 @@
+{
+  "name": "create-fullstacked",
+  "version": "0.0.0-alpha.5",
+  "description": "Create FullStacked Project",
+  "bin": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CPLepage/create-fullstacked.git"
+  },
+  "author": "CP Lepage",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CPLepage/create-fullstacked/issues"
+  },
+  "homepage": "https://fullstacked.org"
+}
