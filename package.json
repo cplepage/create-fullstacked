@@ -1,19 +1,26 @@
 {
   "name": "create-fullstacked",
-  "version": "0.0.4",
+  "version": "0.0.9",
   "description": "Create a FullStacked Project",
-  "bin": {
-    "create-fullstacked": "index.js"
-  },
+  "bin": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CPLepage/create-fullstacked.git"
   },
+  "scripts": {
+    "start": "npx fullstacked watch --src=starter",
+    "test": "npx fullstacked test --src=starter"
+  },
   "author": "CP Lepage",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CPLepage/create-fullstacked/issues"
   },
   "homepage": "https://fullstacked.org",
-  "main": "index.js"
+  "devDependencies": {
+    "fullstacked": "^0.6.0-alpha.8"
+  },
+  "dependencies": {
+    "fs-extra": "^10.1.0"
+  }
 }

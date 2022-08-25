@@ -1,0 +1,8 @@
+.idea
+.gitignore
+dist
+coverage
+.nyc_output
+node_modules
+/starter/**/*.js
+/starter/**/*.js.map
