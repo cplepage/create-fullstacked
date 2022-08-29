@@ -4,7 +4,7 @@ childProcess.execSync("npm init --y", {stdio: "ignore"});
 console.log('\x1b[32m%s\x1b[0m', "Installing Latest FullStacked");
 childProcess.execSync("npm i fullstacked", {stdio: "inherit"});
 
-console.log('\x1b[32m%s\x1b[0m', "Setting you up...");
+console.log('\x1b[33m%s\x1b[0m', "Setting you up...");
 const fs = require("fs");
 const fse = require("fs-extra");
 const path = require("path");

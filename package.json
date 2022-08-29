@@ -18,7 +18,7 @@
   },
   "homepage": "https://fullstacked.org",
   "devDependencies": {
-    "fullstacked": "^0.6.0-alpha.8"
+    "fullstacked": "^0.6.1"
   },
   "dependencies": {
     "fs-extra": "^10.1.0"
