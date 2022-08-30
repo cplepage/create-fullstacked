@@ -2,7 +2,18 @@
 const childProcess = require("child_process");
 childProcess.execSync("npm init --y", {stdio: "ignore"});
 console.log('\x1b[32m%s\x1b[0m', "Installing Latest FullStacked");
-childProcess.execSync("npm i fullstacked", {stdio: "inherit"});
+
+let installCommand = "npm i fullstacked";
+
+process.argv.forEach(arg => {
+    if(arg.startsWith("--tag=")) {
+        const tag = arg.slice("--tag=".length);
+        installCommand += "@" + tag;
+        console.log("Installing tag " + tag);
+    }
+})
+
+childProcess.execSync(installCommand, {stdio: "inherit"});
 
 console.log('\x1b[33m%s\x1b[0m', "Setting you up...");
 const fs = require("fs");
