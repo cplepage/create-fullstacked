@@ -29,17 +29,29 @@ packageJSON.version = "0.0.0";
 fs.writeFileSync(packageJSONFilePath, JSON.stringify(packageJSON, null, 2));
 fse.copySync(path.resolve(__dirname, "starter"), process.cwd(), {});
 
-const defaultValues = {
-    icons: [],
+const appManifestDefaultValues = {
     name: packageJSON.name,
     short_name: packageJSON.name,
     display: "standalone",
     start_url: "/",
     description: "",
     background_color: "#FFF",
-    theme_color: "#FFF"
+    theme_color: "#FFF",
+    icons: [
+        {
+            src: "/app-icons/app-icon.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any"
+        },{
+            src: "/app-icons/maskable.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable"
+        }
+    ]
 }
-fs.writeFileSync(path.resolve(__dirname, "webapp", "manifest.json"), JSON.stringify(defaultValues, null, 2));
+fs.writeFileSync(path.resolve(process.cwd(), "webapp", "manifest.json"), JSON.stringify(appManifestDefaultValues, null, 2));
 
 console.log('\x1b[32m%s\x1b[0m', "You are ready!");
 console.log('\x1b[33m%s\x1b[0m', "Run :", "npm start");
