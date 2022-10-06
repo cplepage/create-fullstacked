@@ -27,7 +27,19 @@ packageJSON.scripts = {
 }
 packageJSON.version = "0.0.0";
 fs.writeFileSync(packageJSONFilePath, JSON.stringify(packageJSON, null, 2));
-fse.copySync(path.resolve(__dirname, "starter"), process.cwd());
+fse.copySync(path.resolve(__dirname, "starter"), process.cwd(), {});
+
+const defaultValues = {
+    icons: [],
+    name: packageJSON.name,
+    short_name: packageJSON.name,
+    display: "standalone",
+    start_url: "/",
+    description: "",
+    background_color: "#FFF",
+    theme_color: "#FFF"
+}
+fs.writeFileSync(path.resolve(__dirname, "webapp", "manifest.json"), JSON.stringify(defaultValues, null, 2));
 
 console.log('\x1b[32m%s\x1b[0m', "You are ready!");
 console.log('\x1b[33m%s\x1b[0m', "Run :", "npm start");
