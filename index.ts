@@ -60,7 +60,7 @@ process.argv.forEach(arg => {
     if(arg.startsWith("--tag=")) fullstackedTag = arg.slice("--tag=".length);
 });
 
-console.log('\x1b[32m%s\x1b[0m', `Installing FullStacked ${fullstackedTag === "latest " ? "" : fullstackedTag}${neededDependencies.length ? "with " : ""}` + neededDependencies.join(", "));
+console.log('\x1b[32m%s\x1b[0m', `Installing FullStacked ${fullstackedTag === "latest" ? "" : (fullstackedTag + " ")}${neededDependencies.length ? "with " : ""}` + neededDependencies.join(", "));
 
 const fullstackedPackage = testMode ? "" : `fullstacked@${fullstackedTag} `;
 let installCommand = "npm i " + (testMode ? "--no-save " : "") + fullstackedPackage + neededDependencies.join(" ");
