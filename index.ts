@@ -54,19 +54,18 @@ templatesToSetup.forEach(template => addTemplate(template));
 const childProcess = require("child_process");
 if(!testMode)
     childProcess.execSync("npm init --y", {stdio: "ignore", cwd: outDir});
-console.log('\x1b[32m%s\x1b[0m', `Installing FullStacked ${neededDependencies.length ? "with " : ""}` + neededDependencies.join(", "));
 
-let installCommand = "npm i fullstacked " + neededDependencies.join(" ") +
-    (testMode ? " --no-save" : "");
-
+let fullstackedTag = "latest";
 process.argv.forEach(arg => {
-    if(arg.startsWith("--tag=")) {
-        const tag = arg.slice("--tag=".length);
-        installCommand += "@" + tag;
-        console.log("Installing tag " + tag);
-    }
+    if(arg.startsWith("--tag=")) fullstackedTag = arg.slice("--tag=".length);
 });
 
+console.log('\x1b[32m%s\x1b[0m', `Installing FullStacked ${fullstackedTag === "latest " ? "" : fullstackedTag}${neededDependencies.length ? "with " : ""}` + neededDependencies.join(", "));
+
+const fullstackedPackage = testMode ? "" : `fullstacked@${fullstackedTag} `;
+let installCommand = "npm i " + (testMode ? "--no-save " : "") + fullstackedPackage + neededDependencies.join(" ");
+
+if(testMode) console.log(installCommand);
 childProcess.execSync(installCommand, {stdio: "inherit", cwd: testMode ? process.cwd() : outDir});
 
 const patchPackageJSON = () => {
@@ -82,7 +81,6 @@ const patchPackageJSON = () => {
 }
 
 if(!testMode) patchPackageJSON();
-
 
 console.log('\x1b[32m%s\x1b[0m', "You are ready!");
 console.log('\x1b[33m%s\x1b[0m', "Run :", "npm start");
