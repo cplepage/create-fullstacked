@@ -3,7 +3,7 @@ import Helper from "fullstacked/tests/e2e/Helper";
 import {equal} from "assert";
 import * as path from "path";
 
-describe("e2e tests", function(){
+describe("Default Template Tests", function(){
     let test;
     before(async function(){
         test = new Helper(path.resolve(__dirname, ".."));

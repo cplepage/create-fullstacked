@@ -22,10 +22,7 @@
   },
   "homepage": "https://fullstacked.org",
   "devDependencies": {
-    "fullstacked": "^0.8.0-alpha2"
-  },
-  "dependencies": {
-    "fs-extra": "^10.1.0"
+    "fullstacked": "^0.8.0-alpha3"
   },
   "main": "index.js",
   "keywords": []

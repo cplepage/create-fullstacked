@@ -4,5 +4,6 @@ dist
 coverage
 .nyc_output
 node_modules
-/starter/**/*.js
-/starter/**/*.js.map
+test.ts
+**/*.js
+**/*.js.map
