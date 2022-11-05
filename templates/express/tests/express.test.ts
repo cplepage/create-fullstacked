@@ -34,7 +34,7 @@ describe("Express Template e2e Tests", function(){
         equal(value, "Hello World");
     });
 
-    after(function(){
-        test.stop();
+    after(async function(){
+        await test.stop();
     });
 });

@@ -17,7 +17,7 @@ describe("Default Template Tests", function(){
         equal(value, "Welcome to FullStacked!");
     });
 
-    after(function(){
-        test.stop();
+    after(async function(){
+        await test.stop();
     });
 });
