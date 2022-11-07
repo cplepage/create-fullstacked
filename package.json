@@ -1,6 +1,6 @@
 {
   "name": "create-fullstacked",
-  "version": "0.1.0-alpha3",
+  "version": "0.1.0",
   "description": "Create a FullStacked Project",
   "bin": {
     "create-fullstacked": "index.js"
@@ -22,7 +22,7 @@
   },
   "homepage": "https://fullstacked.org",
   "devDependencies": {
-    "fullstacked": "^0.8.0-alpha9"
+    "fullstacked": "^0.8.0"
   },
   "main": "index.js"
 }
