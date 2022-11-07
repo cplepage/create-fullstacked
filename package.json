@@ -22,11 +22,7 @@
   },
   "homepage": "https://fullstacked.org",
   "devDependencies": {
-    "fullstacked": "^0.8.0-alpha7"
+    "fullstacked": "^0.8.0-alpha9"
   },
-  "main": "index.js",
-  "keywords": [],
-  "dependencies": {
-    "express": "^4.18.2"
-  }
+  "main": "index.js"
 }

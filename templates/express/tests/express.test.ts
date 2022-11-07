@@ -4,11 +4,12 @@ import Helper from "fullstacked/tests/e2e/Helper"
 import {equal} from "assert";
 import {fetch} from "fullstacked/webapp/fetch";
 import * as path from "path";
-import server from "../server/index";
+import Server from "fullstacked/server";
+import "../server/express.server";
 
 HelperIntegration(describe("Express Template Integration Tests", function() {
     before(async function (){
-        server.start({silent: true, testing: true})
+        Server.start()
     });
 
     it("Should hit /hello-world endpoint", async () => {
@@ -16,7 +17,7 @@ HelperIntegration(describe("Express Template Integration Tests", function() {
     });
 
     after(async function(){
-        server.stop();
+        Server.stop();
     });
 }), path.resolve(__dirname, ".."));
 
