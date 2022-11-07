@@ -1,0 +1,22 @@
+{
+     "name": "FullStacked PWA App",
+     "short_name": "fullstacked-pwa-app",
+     "display": "standalone",
+     "start_url": "/",
+     "description": "",
+     "background_color": "#FFF",
+     "theme_color": "#FFF",
+     "icons": [
+         {
+             "src": "/app-icons/app-icon.png",
+             "sizes": "512x512",
+             "type": "image/png",
+             "purpose": "any"
+         },{
+             "src": "/app-icons/maskable.png",
+             "sizes": "512x512",
+             "type": "image/png",
+             "purpose": "maskable"
+         }
+     ]
+}
