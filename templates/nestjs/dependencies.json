@@ -1,0 +1,21 @@
+{
+    "@nestjs/core": "latest",
+    "@nestjs/common": "latest",
+    "@nestjs/microservices": "latest",
+    "@nestjs/platform-express": "latest",
+    "@nestjs/websockets": "latest",
+    "class-transformer": "latest",
+    "class-validator": "latest",
+    "cache-manager": "latest",
+    "@grpc/grpc-js": "latest",
+    "@grpc/proto-loader": "latest",
+    "kafkajs": "latest",
+    "nats": "latest",
+    "mqtt": "latest",
+    "ioredis": "latest",
+    "amqplib": "latest",
+    "amqp-connection-manager": "latest",
+    "@nestjs/platform-socket.io": "latest",
+    "@nestjs/serve-static": "latest",
+    "@fastify/static": "latest"
+}
