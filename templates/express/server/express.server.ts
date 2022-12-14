@@ -10,6 +10,6 @@ app.get("/hello-world", (req, res) => {
 const { promisifiedListener, resolver } = Server.promisify(app);
 
 // express bottoms out here
-app.use(resolver)
+app.use(resolver);
 
-Server.addListener(promisifiedListener)
+Server.addListener(promisifiedListener);
