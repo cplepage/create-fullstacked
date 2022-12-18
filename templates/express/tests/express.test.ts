@@ -1,13 +1,17 @@
 import {describe, it, before, after} from "mocha";
-import HelperIntegration from "fullstacked/tests/integration/Helper"
-import Helper from "fullstacked/tests/e2e/Helper"
 import {equal} from "assert";
-import {fetch} from "fullstacked/webapp/fetch";
 import * as path from "path";
-import Server from "fullstacked/server";
-import "../server/express.server";
+import "../server/express.server.js";
+import testIntegration from "fullstacked/utils/testIntegration.js";
+import {fetch} from "fullstacked/utils/fetch.js";
+import TestE2E from "fullstacked/utils/testE2E.js";
+import {dirname} from "path";
+import {fileURLToPath} from "url";
+import Server from "fullstacked/server/index.js";
 
-HelperIntegration(describe("Express Template Integration Tests", function() {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+testIntegration(describe("Express Template Integration Tests", function() {
     before(async function (){
         Server.start()
     });
@@ -24,7 +28,7 @@ HelperIntegration(describe("Express Template Integration Tests", function() {
 describe("Express Template e2e Tests", function(){
     let test;
     before(async function(){
-        test = new Helper(path.resolve(__dirname, ".."));
+        test = new TestE2E(path.resolve(__dirname, ".."));
         await test.start("/hello-world");
     });
 

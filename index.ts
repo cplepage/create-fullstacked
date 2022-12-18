@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 import * as fs from "fs";
 import * as path from "path";
+import {execSync} from "child_process";
+import {dirname} from "path";
+import {fileURLToPath} from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const testMode = process.argv.includes("--test");
 
@@ -51,9 +56,8 @@ const addTemplate = (template: string, directories: string[] = []) => {
 addTemplate("default");
 templatesToSetup.forEach(template => addTemplate(template));
 
-const childProcess = require("child_process");
 if(!testMode)
-    childProcess.execSync("npm init --y", {stdio: "ignore", cwd: outDir});
+    execSync("npm init --y", {stdio: "ignore", cwd: outDir});
 
 let fullstackedTag = "latest";
 process.argv.forEach(arg => {
@@ -66,7 +70,8 @@ const fullstackedPackage = testMode ? "" : `fullstacked@${fullstackedTag} `;
 let installCommand = "npm i " + (testMode ? "--no-save " : "") + fullstackedPackage + neededDependencies.join(" ");
 
 if(testMode) console.log(installCommand);
-childProcess.execSync(installCommand, {stdio: "inherit", cwd: testMode ? process.cwd() : outDir});
+
+execSync(installCommand, {stdio: "inherit", cwd: testMode ? process.cwd() : outDir});
 
 const patchPackageJSON = () => {
     console.log('\x1b[33m%s\x1b[0m', "Patching package.json");
@@ -84,4 +89,3 @@ if(!testMode) patchPackageJSON();
 
 console.log('\x1b[32m%s\x1b[0m', "You are ready!");
 console.log('\x1b[33m%s\x1b[0m', "Run :", "npm start");
-
