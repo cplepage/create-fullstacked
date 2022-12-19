@@ -1,3 +1,5 @@
 {
-    "mongodb": "latest"
+    "install": {
+        "mongodb": "latest"
+    }
 }

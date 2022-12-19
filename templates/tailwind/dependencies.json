@@ -1,5 +1,7 @@
 {
-    "tailwindcss": "latest",
-    "postcss": "latest",
-    "cssnano": "latest"
+    "install": {
+        "tailwindcss": "latest",
+        "postcss": "latest",
+        "cssnano": "latest"
+    }
 }

@@ -1,3 +1,5 @@
 {
-    "http-proxy": "latest"
+    "install": {
+        "http-proxy": "latest"
+    }
 }

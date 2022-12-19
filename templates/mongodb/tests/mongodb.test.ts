@@ -1,6 +1,6 @@
 import {describe, it} from "mocha";
 import {ok} from "assert";
-import * as path from "path";
+import {resolve} from "path";
 import Mongo from "../server/mongodb.js";
 import testIntegration from "fullstacked/utils/testIntegration.js";
 import {dirname} from "path";
@@ -15,4 +15,4 @@ testIntegration(describe("MongoDB Template Tests", function(){
         ok(connection);
         await connection.close();
     });
-}), path.resolve(__dirname, ".."));
+}), resolve(__dirname, ".."));

@@ -22,8 +22,8 @@
     "url": "https://github.com/CPLepage/create-fullstacked/issues"
   },
   "homepage": "https://fullstacked.org",
+  "main": "index.js",
   "devDependencies": {
-    "fullstacked": "^0.9.0-rc8"
-  },
-  "main": "index.js"
+    "fullstacked": "^0.8.4"
+  }
 }
