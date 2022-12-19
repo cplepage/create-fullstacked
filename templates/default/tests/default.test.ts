@@ -11,6 +11,7 @@ describe("Default Template Tests", function(){
     let test;
     before(async function(){
         test = new TestE2E(path.resolve(__dirname, ".."));
+        this.timeout(await test.init());
         await test.start();
     });
 

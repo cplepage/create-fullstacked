@@ -88,7 +88,7 @@ if(testMode){
         if(!file.startsWith("fullstacked") || !file.endsWith(".tgz")) return;
 
         console.log(`Installing local FullStacked Version [${file}]`);
-        fullstackedPackage = resolve(__dirname, file) + " ";
+        execSync(`npm i ${file}`, {stdio: "inherit"});
     });
 }
 let installCommand = "npm i " + (testMode ? "--no-save " : "") + fullstackedPackage + Array.from(neededDependencies).join(" ") + " " +
@@ -97,8 +97,8 @@ let installCommand = "npm i " + (testMode ? "--no-save " : "") + fullstackedPack
 if(testMode) console.log(installCommand);
 
 execSync(installCommand, {stdio: "inherit", cwd: testMode ? process.cwd() : outDir});
-fs.writeFileSync(resolve(outDir, "ignore.json"), JSON.stringify({ignore: Array.from(ignoredPackages)}, null, 4));
-fs.writeFileSync(resolve(outDir, "server", "native.json"), JSON.stringify(nativePackages, null, 4));
+if(ignoredPackages.size) fs.writeFileSync(resolve(outDir, "ignore.json"), JSON.stringify({ignore: Array.from(ignoredPackages)}, null, 4));
+if(Object.keys(nativePackages).length) fs.writeFileSync(resolve(outDir, "server", "native.json"), JSON.stringify(nativePackages, null, 4));
 
 const patchPackageJSON = () => {
     console.log('\x1b[33m%s\x1b[0m', "Patching package.json");
