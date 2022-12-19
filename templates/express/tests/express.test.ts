@@ -7,7 +7,7 @@ import {fetch} from "fullstacked/utils/fetch.js";
 import TestE2E from "fullstacked/utils/testE2E.js";
 import {dirname} from "path";
 import {fileURLToPath} from "url";
-import Server from "fullstacked/server/index.js";
+import Server from "fullstacked/server.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
