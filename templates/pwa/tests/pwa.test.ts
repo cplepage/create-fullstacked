@@ -19,7 +19,7 @@ describe("PWA Template Tests", function(){
         const innerHTML = await root.getProperty('innerHTML');
         const value = await innerHTML.jsonValue();
         ok(value.includes("<link rel=\"manifest\" href=\"/manifest.json\">"))
-        ok(value.includes("<script src=\"/service-worker.js\"></script>"))
+        ok(value.includes("<script type=\"module\" src=\"/service-worker.js\"></script>"))
     });
 
     it('Should get the manifest', async function(){
