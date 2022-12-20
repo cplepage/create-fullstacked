@@ -15,7 +15,7 @@ import Server from "fullstacked/server.js";
 
     const {promisifiedListener, resolver} = Server.promisify(nestjs.getHttpAdapter().getInstance());
     HttpExceptionFilter.resolver = resolver;
-    Server.addListener(promisifiedListener, true);
+    Server.addListener(promisifiedListener);
 })();
 
 @Catch(HttpException)

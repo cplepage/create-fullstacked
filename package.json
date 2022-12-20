@@ -23,7 +23,7 @@
   },
   "homepage": "https://fullstacked.org",
   "devDependencies": {
-    "fullstacked": "file:fullstacked-0.9.0-0.tgz"
+    "fullstacked": "file:fullstacked-0.9.0-6.tgz"
   },
   "main": "index.js"
 }
