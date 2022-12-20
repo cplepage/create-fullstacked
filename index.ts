@@ -109,6 +109,7 @@ const patchPackageJSON = () => {
         test : "npx fullstacked test"
     }
     packageJSON.version = "0.0.0";
+    packageJSON.type = "module";
     fs.writeFileSync(packageJSONFilePath, JSON.stringify(packageJSON, null, 2));
 }
 
