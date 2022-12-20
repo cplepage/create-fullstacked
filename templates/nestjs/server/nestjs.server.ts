@@ -4,7 +4,6 @@ import {AppModule} from "./src/app.module.js";
 import Server from "fullstacked/server.js";
 
 (async () => {
-
     const options: NestApplicationOptions = {};
 
     if(!process.argv.includes("--development"))
@@ -13,10 +12,9 @@ import Server from "fullstacked/server.js";
     const nestjs = await NestFactory.create(AppModule, options);
     nestjs.useGlobalFilters(new HttpExceptionFilter());
     await nestjs.init();
+
     const {promisifiedListener, resolver} = Server.promisify(nestjs.getHttpAdapter().getInstance());
-
     HttpExceptionFilter.resolver = resolver;
-
     Server.addListener(promisifiedListener, true);
 })();
 
