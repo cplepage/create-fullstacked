@@ -1,6 +1,6 @@
 import testIntegration from "fullstacked/utils/testIntegration.js";
 import {describe, it} from "mocha";
-import sqliteDB from "../server/sqlite3.js";
+import SQLite3 from "../server/sqlite3.js";
 import {dirname, resolve} from "path";
 import {fileURLToPath} from "url";
 import {deepEqual} from "assert";
@@ -10,6 +10,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 testIntegration(describe("SQLite3 Template Tests", function(){
 
     it("Should run sqlite3", () => {
+        const sqliteDB = new SQLite3().getDB();
+
         const ids = [];
         const infos = [];
 
