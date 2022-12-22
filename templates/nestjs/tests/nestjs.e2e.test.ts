@@ -10,7 +10,7 @@ describe("NestJS Template e2e Tests", function(){
     let test;
     before(async function(){
         test = new TestE2E(path.resolve(__dirname, ".."));
-        await test.start("/hello-world");
+        await test.start("/hello-nestjs");
     });
 
     it('Should respond with Hello from NestJS', async function(){

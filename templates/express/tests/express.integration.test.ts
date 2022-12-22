@@ -11,8 +11,8 @@ testIntegration(describe("Express Template Integration Tests", function() {
         Server.start()
     });
 
-    it("Should hit /hello-world endpoint", async () => {
-        equal(await fetch.get("http://localhost/hello-world"), "Hello World");
+    it("Should hit /hello-express endpoint", async () => {
+        equal(await fetch.get("http://localhost/hello-express"), "Hello from express");
     });
 
     after(async function(){

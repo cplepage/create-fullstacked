@@ -3,8 +3,8 @@ import express from "express"
 
 const app = express();
 
-app.get("/hello-world", (req, res) => {
-    res.send("Hello World");
+app.get("/hello-express", (req, res) => {
+    res.send("Hello from express");
 });
 
 const { promisifiedListener, resolver } = Server.promisify(app);

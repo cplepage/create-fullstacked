@@ -11,8 +11,8 @@ testIntegration(describe("NestJS Template Integration Tests", function() {
         Server.start()
     });
 
-    it("Should hit /hello-world endpoint", async () => {
-        equal(await fetch.get("http://localhost/hello-world"), "Hello from NestJS");
+    it("Should hit /hello-nestjs endpoint", async () => {
+        equal(await fetch.get("http://localhost/hello-nestjs"), "Hello from NestJS");
     });
 
     after(async function(){
