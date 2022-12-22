@@ -1,6 +1,6 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
-import App from "./src/App"
+import App from "./react/App"
 
 export default function main(){
     const root = createRoot(document.querySelector("fullstacked-root"));
