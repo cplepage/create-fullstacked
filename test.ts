@@ -19,11 +19,4 @@ for (const template of templates){
     execSync(`npx fullstacked test ${process.argv.includes("--debug") ? "" : "--headless"} --src=test`, {stdio: "inherit"});
 }
 
-if(!templateTestDefined){
-    fs.rmSync(path.resolve(__dirname, "test"), {force: true, recursive: true});
-    console.log(`Ultimate Test`);
-    execSync(`node index --test --outDir=test ${templates.join(" ")}`, {stdio: process.argv.includes("--debug") ? "inherit" : "ignore"});
-    execSync(`npx fullstacked test ${process.argv.includes("--debug") ? "" : "--headless"} --src=test`, {stdio: "inherit"});
-}
-
 fs.rmSync(path.resolve(__dirname, "test"), {force: true, recursive: true});

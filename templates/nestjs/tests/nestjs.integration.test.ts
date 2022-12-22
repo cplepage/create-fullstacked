@@ -1,7 +1,7 @@
 import testIntegration from "fullstacked/utils/testIntegration.js";
 import {after, before, describe, it} from "mocha";
 import Server from "fullstacked/server.js";
-import {equal} from "assert";
+import {equal, ok} from "assert";
 import {fetch} from "fullstacked/utils/fetch.js";
 
 import "../server/nestjs.server.js";
@@ -13,6 +13,24 @@ testIntegration(describe("NestJS Template Integration Tests", function() {
 
     it("Should hit /hello-nestjs endpoint", async () => {
         equal(await fetch.get("http://localhost/hello-nestjs"), "Hello from NestJS");
+    });
+
+    it("Should error at /hello-nestjs/error endpoint", async () => {
+        let errored = false;
+        try{
+            await fetch.get("http://localhost/hello-nestjs/error")
+        }catch (e){
+            errored = true
+        }
+        ok(errored);
+    });
+
+    it("Should pass through nestjs", async () => {
+        Server.addListener((req, res) => {
+            res.writeHead(200);
+            res.end("1");
+        })
+        ok(await fetch.get("http://localhost/"));
     });
 
     after(async function(){

@@ -1,5 +1,5 @@
-import { NestFactory } from '@nestjs/core';
-import { Catch, HttpException, ExceptionFilter, ArgumentsHost, NotFoundException, NestApplicationOptions } from '@nestjs/common';
+import {BaseExceptionFilter, NestFactory} from '@nestjs/core';
+import { Catch, HttpException, ArgumentsHost, NotFoundException, NestApplicationOptions } from '@nestjs/common';
 import {AppModule} from "./nestjs/app.module.js";
 import Server from "fullstacked/server.js";
 
@@ -10,7 +10,7 @@ import Server from "fullstacked/server.js";
         options.logger = false;
 
     const nestjs = await NestFactory.create(AppModule, options);
-    nestjs.useGlobalFilters(new HttpExceptionFilter());
+    nestjs.useGlobalFilters(new HttpExceptionFilter(nestjs.getHttpAdapter()));
     await nestjs.init();
 
     const {promisifiedListener, resolver} = Server.promisify(nestjs.getHttpAdapter().getInstance());
@@ -19,7 +19,7 @@ import Server from "fullstacked/server.js";
 })();
 
 @Catch(HttpException)
-class HttpExceptionFilter implements ExceptionFilter {
+class HttpExceptionFilter extends BaseExceptionFilter {
     static resolver;
     catch(exception: HttpException, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
@@ -29,6 +29,6 @@ class HttpExceptionFilter implements ExceptionFilter {
         if(exception instanceof NotFoundException && HttpExceptionFilter.resolver)
             return HttpExceptionFilter.resolver(request, response);
         else
-            throw exception;
+            super.catch(exception, host);
     }
 }
