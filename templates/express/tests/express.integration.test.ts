@@ -1,10 +1,10 @@
-import testIntegration from "fullstacked/utils/testIntegration.js";
+import testIntegration from "fullstacked/utils/testIntegration";
 import {after, before, describe, it} from "mocha";
-import Server from "fullstacked/server.js";
+import Server from "fullstacked/server";
 import {equal} from "assert";
-import {fetch} from "fullstacked/utils/fetch.js";
+import {fetch} from "fullstacked/utils/fetch";
 
-import "../server/express.server.js";
+import "../server/express.server";
 
 testIntegration(describe("Express Template Integration Tests", function() {
     before(async function (){

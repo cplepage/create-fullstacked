@@ -1,6 +1,6 @@
-import testIntegration from "fullstacked/utils/testIntegration.js";
+import testIntegration from "fullstacked/utils/testIntegration";
 import {describe, it} from "mocha";
-import SQLite3 from "../server/sqlite3.js";
+import SQLite3 from "../server/sqlite3";
 import {dirname, resolve} from "path";
 import {fileURLToPath} from "url";
 import {deepEqual} from "assert";

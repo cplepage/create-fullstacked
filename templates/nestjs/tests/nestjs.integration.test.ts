@@ -1,10 +1,10 @@
-import testIntegration from "fullstacked/utils/testIntegration.js";
+import testIntegration from "fullstacked/utils/testIntegration";
 import {after, before, describe, it} from "mocha";
-import Server from "fullstacked/server.js";
+import Server from "fullstacked/server";
 import {equal, ok} from "assert";
-import {fetch} from "fullstacked/utils/fetch.js";
+import {fetch} from "fullstacked/utils/fetch";
 
-import "../server/nestjs.server.js";
+import "../server/nestjs.server";
 
 testIntegration(describe("NestJS Template Integration Tests", function() {
     before(async function (){

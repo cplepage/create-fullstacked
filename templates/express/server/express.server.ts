@@ -1,4 +1,4 @@
-import Server from "fullstacked/server.js";
+import Server from "fullstacked/server";
 import express from "express"
 
 const app = express();

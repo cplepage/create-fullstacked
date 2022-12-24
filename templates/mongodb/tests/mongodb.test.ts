@@ -1,8 +1,8 @@
 import {describe, it} from "mocha";
 import {ok} from "assert";
 import {resolve} from "path";
-import Mongo from "../server/mongodb.js";
-import testIntegration from "fullstacked/utils/testIntegration.js";
+import Mongo from "../server/mongodb";
+import testIntegration from "fullstacked/utils/testIntegration";
 import {dirname} from "path";
 import {fileURLToPath} from "url";
 

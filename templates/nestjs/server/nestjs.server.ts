@@ -1,7 +1,7 @@
 import {BaseExceptionFilter, NestFactory} from '@nestjs/core';
 import { Catch, HttpException, ArgumentsHost, NotFoundException, NestApplicationOptions } from '@nestjs/common';
-import {AppModule} from "./nestjs/app.module.js";
-import Server from "fullstacked/server.js";
+import {AppModule} from "./nestjs/app.module";
+import Server from "fullstacked/server";
 
 (async () => {
     const options: NestApplicationOptions = {};

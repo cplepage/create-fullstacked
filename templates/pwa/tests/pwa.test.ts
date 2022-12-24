@@ -1,7 +1,7 @@
 import {describe, it, before, after} from "mocha";
 import * as path from "path";
 import {ok} from "assert";
-import TestE2E from "fullstacked/utils/testE2E.js";
+import TestE2E from "fullstacked/utils/testE2E";
 import {dirname} from "path";
 import {fileURLToPath} from "url";
 
