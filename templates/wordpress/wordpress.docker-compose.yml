@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   wordpress_db:
     image: mysql:5.7

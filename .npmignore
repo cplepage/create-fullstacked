@@ -4,6 +4,9 @@ dist
 coverage
 .nyc_output
 node_modules
-test.ts
+/index.ts
+/test.ts
+/test
 **/*.js
 **/*.js.map
+tsconfig.json

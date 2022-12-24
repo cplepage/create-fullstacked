@@ -1,4 +1,6 @@
 {
-    "@types/express": "latest",
-    "express": "latest"
+    "install": {
+        "@types/express": "latest",
+        "express": "latest"
+    }
 }

@@ -7,19 +7,18 @@ import {fileURLToPath} from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-describe("Default Template Tests", function(){
+describe("Express Template e2e Tests", function(){
     let test;
     before(async function(){
         test = new TestE2E(path.resolve(__dirname, ".."));
-        this.timeout(await test.init());
-        await test.start();
+        await test.start("/hello-express");
     });
 
-    it('Should display main title', async function(){
-        const root = await test.page.$("h1");
+    it('Should respond with Hello from express', async function(){
+        const root = await test.page.$("body");
         const innerHTML = await root.getProperty('innerHTML');
         const value = await innerHTML.jsonValue();
-        equal(value, "Welcome to FullStacked!");
+        equal(value, "Hello from express");
     });
 
     after(async function(){

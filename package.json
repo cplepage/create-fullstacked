@@ -1,6 +1,6 @@
 {
   "name": "create-fullstacked",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Create a FullStacked Project",
   "bin": {
     "create-fullstacked": "index.js"
@@ -10,19 +10,20 @@
     "url": "git+https://github.com/CPLepage/create-fullstacked.git"
   },
   "scripts": {
-    "build": "npx esbuild index.ts --outfile=index.js --format=cjs",
-    "pretest": "npm run build && npx esbuild test.ts --outfile=test.js --format=cjs",
+    "build": "npx esbuild index.ts --outfile=index.js --format=esm",
+    "pretest": "npm run build && npx esbuild test.ts --outfile=test.js --format=esm",
     "test": "node test",
     "prepublishOnly": "npm run build"
   },
   "author": "CP Lepage",
   "license": "MIT",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/CPLepage/create-fullstacked/issues"
   },
   "homepage": "https://fullstacked.org",
   "devDependencies": {
-    "fullstacked": "^0.8.0"
+    "fullstacked": "file:fullstacked-0.9.0-rc17.tgz"
   },
   "main": "index.js"
 }

@@ -2,10 +2,14 @@ import Server from "fullstacked/server";
 import express from "express"
 
 const app = express();
-app.use(express.static(Server.publicDir));
 
-app.get("/hello-world", (req, res) => {
-    res.send("Hello World");
+app.get("/hello-express", (req, res) => {
+    res.send("Hello from express");
 });
 
-Server.addListener(app);
+const { promisifiedListener, resolver } = Server.promisify(app);
+
+// express bottoms out here
+app.use(resolver);
+
+Server.addListener(promisifiedListener);

@@ -1,6 +1,10 @@
 import * as path from "path";
 import * as fs from "fs";
 import {execSync} from "child_process";
+import {dirname} from "path";
+import {fileURLToPath} from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const templatePath = path.resolve(__dirname, "templates");
 let templates = fs.readdirSync(templatePath);

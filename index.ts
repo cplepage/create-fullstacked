@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 import * as fs from "fs";
 import * as path from "path";
+import {execSync} from "child_process";
+import {dirname, resolve} from "path";
+import {fileURLToPath} from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const testMode = process.argv.includes("--test");
 
@@ -20,7 +25,9 @@ console.log('\x1b[33m%s\x1b[0m', "Setting you up with...");
 if(!templatesToSetup.length) console.log("default")
 else templatesToSetup.forEach(template => console.log(template));
 
-const neededDependencies = [];
+const neededDependencies = new Set();
+const ignoredPackages = new Set();
+const nativePackages = {};
 
 const addTemplate = (template: string, directories: string[] = []) => {
     const templatePath = path.resolve(templatesBasePath, template);
@@ -31,8 +38,19 @@ const addTemplate = (template: string, directories: string[] = []) => {
 
         if(item === "dependencies.json"){
             const dependencies = JSON.parse(fs.readFileSync(itemPath, {encoding: "utf-8"}));
-            Object.keys(dependencies).forEach(dependency =>
-                neededDependencies.push(dependency + "@" + dependencies[dependency]));
+
+            if(dependencies.install){
+                Object.keys(dependencies.install).forEach(dependency => neededDependencies.add(dependency + "@" + dependencies.install[dependency]));
+            }
+
+            if(dependencies.ignore){
+                dependencies.ignore.forEach(packageName => ignoredPackages.add(packageName));
+            }
+
+            if(dependencies.native){
+                Object.keys(dependencies.native).forEach(dependency => nativePackages[dependency] = dependencies.native[dependency]);
+            }
+
             return;
         }
 
@@ -51,22 +69,36 @@ const addTemplate = (template: string, directories: string[] = []) => {
 addTemplate("default");
 templatesToSetup.forEach(template => addTemplate(template));
 
-const childProcess = require("child_process");
 if(!testMode)
-    childProcess.execSync("npm init --y", {stdio: "ignore", cwd: outDir});
+    execSync("npm init --y", {stdio: "ignore", cwd: outDir});
 
 let fullstackedTag = "latest";
 process.argv.forEach(arg => {
     if(arg.startsWith("--tag=")) fullstackedTag = arg.slice("--tag=".length);
 });
 
-console.log('\x1b[32m%s\x1b[0m', `Installing FullStacked ${fullstackedTag === "latest" ? "" : (fullstackedTag + " ")}${neededDependencies.length ? "with " : ""}` + neededDependencies.join(", "));
+console.log('\x1b[32m%s\x1b[0m', `Installing FullStacked ${fullstackedTag === "latest" ? "" : (fullstackedTag + " ")}${neededDependencies.size ? "with " : ""}` +
+    Array.from(neededDependencies).join(", "));
 
-const fullstackedPackage = testMode ? "" : `fullstacked@${fullstackedTag} `;
-let installCommand = "npm i " + (testMode ? "--no-save " : "") + fullstackedPackage + neededDependencies.join(" ");
+let fullstackedPackage = `fullstacked@${fullstackedTag} `;
+if(testMode){
+    fullstackedPackage = "";
+    const localFiles = fs.readdirSync(__dirname);
+    localFiles.forEach(file => {
+        if(!file.startsWith("fullstacked") || !file.endsWith(".tgz")) return;
+
+        console.log(`Installing local FullStacked Version [${file}]`);
+        execSync(`npm i ${file}`, {stdio: "inherit"});
+    });
+}
+let installCommand = "npm i " + (testMode ? "--no-save " : "") + fullstackedPackage + Array.from(neededDependencies).join(" ") + " " +
+    Object.keys(nativePackages).map(dependency => dependency + "@" + nativePackages[dependency]).join(" ");
 
 if(testMode) console.log(installCommand);
-childProcess.execSync(installCommand, {stdio: "inherit", cwd: testMode ? process.cwd() : outDir});
+
+execSync(installCommand, {stdio: "inherit", cwd: testMode ? process.cwd() : outDir});
+if(ignoredPackages.size) fs.writeFileSync(resolve(outDir, "ignore.json"), JSON.stringify({ignore: Array.from(ignoredPackages)}, null, 4));
+if(Object.keys(nativePackages).length) fs.writeFileSync(resolve(outDir, "server", "native.json"), JSON.stringify(nativePackages, null, 4));
 
 const patchPackageJSON = () => {
     console.log('\x1b[33m%s\x1b[0m', "Patching package.json");
@@ -77,6 +109,7 @@ const patchPackageJSON = () => {
         test : "npx fullstacked test"
     }
     packageJSON.version = "0.0.0";
+    packageJSON.type = "module";
     fs.writeFileSync(packageJSONFilePath, JSON.stringify(packageJSON, null, 2));
 }
 
@@ -84,4 +117,3 @@ if(!testMode) patchPackageJSON();
 
 console.log('\x1b[32m%s\x1b[0m', "You are ready!");
 console.log('\x1b[33m%s\x1b[0m', "Run :", "npm start");
-

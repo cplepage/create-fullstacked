@@ -1,6 +1,6 @@
 {
-     "name": "FullStacked PWA App",
-     "short_name": "fullstacked-pwa-app",
+     "name": "FullStacked PWA",
+     "short_name": "fullstacked-pwa",
      "display": "standalone",
      "start_url": "/",
      "description": "",
