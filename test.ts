@@ -19,4 +19,4 @@ for (const template of templates){
     execSync(`npx fullstacked test ${process.argv.includes("--debug") ? "" : "--headless"} --src=test`, {stdio: "inherit"});
 }
 
-// fs.rmSync(path.resolve(__dirname, "test"), {force: true, recursive: true});
+fs.rmSync(path.resolve(__dirname, "test"), {force: true, recursive: true});

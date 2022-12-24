@@ -15,4 +15,4 @@ testIntegration(describe("MongoDB Template Tests", function(){
         ok(connection);
         await connection.close();
     });
-}), resolve(__dirname, ".."));
+}));

@@ -34,4 +34,4 @@ testIntegration(describe("SQLite3 Template Tests", function(){
         deepEqual(ids, infos);
     });
 
-}), resolve(__dirname, ".."));
+}));
