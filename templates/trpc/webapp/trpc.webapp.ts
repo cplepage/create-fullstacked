@@ -13,15 +13,10 @@ const trpc = createTRPCProxyClient<AppRouter>({
     }
 });
 
-const trpcDivID = "hello-from-trpc"
 async function helloFromTRPC(){
-    let trpcDIV = document.getElementById(trpcDivID);
-
-    if(!trpcDIV){
-        trpcDIV = document.createElement("div");
-        trpcDIV.setAttribute("id", trpcDivID)
-        document.body.append(trpcDIV);
-    }
+    const trpcDIV = document.createElement("div");
+    trpcDIV.setAttribute("id", "hello-from-trpc")
+    document.body.append(trpcDIV);
 
     trpcDIV.innerHTML = await trpc.helloTRPC.query();
 }

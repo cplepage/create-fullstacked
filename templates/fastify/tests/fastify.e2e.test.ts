@@ -7,21 +7,21 @@ import {fileURLToPath} from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-describe("tRPC Template e2e Tests", function(){
+describe("Fastify Template e2e Tests", function(){
     let test;
     before(async function(){
         test = new TestE2E(path.resolve(__dirname, ".."));
-        await test.start();
+        await test.start("/hello-fastify");
     });
 
-    it('Should get hello from tRPC', async function(){
-        const root = await test.page.$("#hello-from-trpc");
+    it('Should respond with Hello from Fastify', async function(){
+        const root = await test.page.$("pre");
         const innerHTML = await root.getProperty('innerHTML');
         const value = await innerHTML.jsonValue();
-        equal(value, "Hello from tRPC");
+        equal(value, "Hello from Fastify");
     });
 
-    after(function(){
-        test.stop();
+    after(async function(){
+        await test.stop();
     });
 });
