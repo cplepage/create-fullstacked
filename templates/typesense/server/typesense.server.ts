@@ -5,12 +5,15 @@ import {testCollection, typesensePath} from "./typesense.values";
 
 const proxy = httpProxy.createServer({ws: false});
 
-Server.addListener((req, res) => {
-    if(!req.url.startsWith(typesensePath)) return;
-    req.url = req.url.slice(typesensePath.length);
-    return new Promise<void>(resolve => {
-        proxy.web(req, res, {target: "http://typesense:8108"}, resolve);
-    });
+Server.listeners.push({
+    title: "Typesense proxy",
+    handler(req, res){
+        if (!req.url.startsWith(typesensePath)) return;
+        req.url = req.url.slice(typesensePath.length);
+        return new Promise<void>(resolve => {
+            proxy.web(req, res, {target: "http://typesense:8108"}, resolve);
+        });
+    }
 });
 
 const client = new Typesense.Client({

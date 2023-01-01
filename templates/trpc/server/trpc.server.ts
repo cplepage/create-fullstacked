@@ -12,12 +12,12 @@ const httpHandler = createHTTPHandler({
     router: appRouter
 });
 
-const {promisifiedListener, resolver} = Server.promisify(async (req, res) => {
+const {handler, resolver} = Server.promisify((req, res) => {
     const headerMap = new Map();
     const setHeader = res.setHeader.bind(res);
     const end = res.end.bind(res);
 
-    await httpHandler(req, {
+    return httpHandler(req, {
         ...res,
         setHeader: (key, value) => {
             headerMap.set(key, value);
@@ -34,6 +34,9 @@ const {promisifiedListener, resolver} = Server.promisify(async (req, res) => {
     });
 })
 
-Server.addListener(promisifiedListener);
+Server.listeners.push({
+    title: "tRPC",
+    handler
+});
 
 export type AppRouter = typeof appRouter;

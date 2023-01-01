@@ -4,12 +4,14 @@ import {pathToFileURL} from "url";
 
 let globalResolver;
 const fastify = Fastify({
-    logger: true,
-    serverFactory: (handler, opts) => {
+    serverFactory: (fastifyHandler, opts) => {
         Server.stop();
-        const {promisifiedListener, resolver} = Server.promisify(handler);
+        const {handler, resolver} = Server.promisify(fastifyHandler);
         globalResolver = resolver;
-        Server.addListener(promisifiedListener);
+        Server.listeners.push({
+            title: "Fastify",
+            handler
+        });
         return Server.server;
     }
 });

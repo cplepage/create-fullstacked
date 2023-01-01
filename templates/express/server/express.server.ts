@@ -7,9 +7,12 @@ app.get("/hello-express", (req, res) => {
     res.send("Hello from express");
 });
 
-const { promisifiedListener, resolver } = Server.promisify(app);
+const { handler, resolver } = Server.promisify(app);
 
 // express bottoms out here
 app.use(resolver);
 
-Server.addListener(promisifiedListener);
+Server.listeners.push({
+    title: "express",
+    handler
+});

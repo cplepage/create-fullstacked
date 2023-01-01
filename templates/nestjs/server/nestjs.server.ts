@@ -13,9 +13,12 @@ import Server from "fullstacked/server";
     nestjs.useGlobalFilters(new HttpExceptionFilter(nestjs.getHttpAdapter()));
     await nestjs.init();
 
-    const {promisifiedListener, resolver} = Server.promisify(nestjs.getHttpAdapter().getInstance());
+    const {handler, resolver} = Server.promisify(nestjs.getHttpAdapter().getInstance());
     HttpExceptionFilter.resolver = resolver;
-    Server.addListener(promisifiedListener);
+    Server.listeners.push({
+        title: "NestJS",
+        handler
+    });
 })();
 
 @Catch(HttpException)
