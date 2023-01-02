@@ -7,3 +7,5 @@ class Version extends HTMLElement{
 }
 
 customElements.define("fullstacked-root", Version);
+
+document.body.append(new Version());

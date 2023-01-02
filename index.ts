@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
 import {execSync} from "child_process";
 import {dirname, resolve} from "path";
 import {fileURLToPath} from "url";
@@ -12,29 +11,30 @@ const testMode = process.argv.includes("--test");
 let outDir = process.cwd();
 process.argv.forEach(arg => {
     if(arg.startsWith("--outDir="))
-        outDir = path.resolve(process.cwd(), arg.substring("--outDir=".length));
+        outDir = resolve(process.cwd(), arg.substring("--outDir=".length));
 });
 
 if(!fs.existsSync(outDir)) fs.mkdirSync(outDir, {recursive: true});
 
-const templatesBasePath = path.resolve(__dirname, "templates");
+const templatesBasePath = resolve(__dirname, "templates");
 const availableTemplates = fs.readdirSync(templatesBasePath);
 const templatesToSetup = process.argv.filter(template => availableTemplates.includes(template));
 
-console.log('\x1b[33m%s\x1b[0m', "Setting you up with...");
-if(!templatesToSetup.length) console.log("default")
-else templatesToSetup.forEach(template => console.log(template));
+if(templatesToSetup.length){
+    console.log('\x1b[33m%s\x1b[0m', "Setting you up with...");
+    templatesToSetup.forEach(template => console.log(template));
+}
 
 const neededDependencies = new Set();
 const ignoredPackages = new Set();
 const nativePackages = {};
 
 const addTemplate = (template: string, directories: string[] = []) => {
-    const templatePath = path.resolve(templatesBasePath, template);
-    const basePath = path.resolve(templatePath, ...directories);
+    const templatePath = resolve(templatesBasePath, template);
+    const basePath = resolve(templatePath, ...directories);
     const content = fs.readdirSync(basePath);
     content.forEach(item => {
-        const itemPath = path.resolve(basePath, item)
+        const itemPath = resolve(basePath, item)
 
         if(item === "dependencies.json"){
             const dependencies = JSON.parse(fs.readFileSync(itemPath, {encoding: "utf-8"}));
@@ -65,8 +65,6 @@ const addTemplate = (template: string, directories: string[] = []) => {
         addTemplate(templatePath, [...directories, item]);
     });
 }
-
-addTemplate("default");
 templatesToSetup.forEach(template => addTemplate(template));
 
 if(!testMode)
@@ -102,7 +100,7 @@ if(Object.keys(nativePackages).length) fs.writeFileSync(resolve(outDir, "server"
 
 const patchPackageJSON = () => {
     console.log('\x1b[33m%s\x1b[0m', "Patching package.json");
-    const packageJSONFilePath = path.resolve(outDir, "package.json");
+    const packageJSONFilePath = resolve(outDir, "package.json");
     const packageJSON = JSON.parse(fs.readFileSync(packageJSONFilePath, {encoding: "utf-8"}));
     packageJSON.scripts = {
         start: "npx fullstacked watch",
