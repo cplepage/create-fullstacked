@@ -2,7 +2,7 @@ import FullStackedVersion from "fullstacked/version";
 
 class Version extends HTMLElement{
     async connectedCallback(){
-        this.innerHTML += `<div>You are on version <em>${FullStackedVersion}</em></div>`;
+        this.innerHTML += `<div>You are on version <em id="version">${FullStackedVersion}</em></div>`;
     }
 }
 
