@@ -4,7 +4,6 @@ import * as path from "path";
 import TestE2E from "fullstacked/utils/testE2E";
 import {dirname} from "path";
 import {fileURLToPath} from "url";
-import {ElementHandle} from "puppeteer";
 import sleep from "fullstacked/utils/sleep";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -12,10 +11,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 describe("Typesense Template e2e Tests", function(){
     let test;
     before(async function(){
+        this.timeout(100000)
         test = new TestE2E(path.resolve(__dirname, ".."));
-
-        this.timeout = (await test.init());
-
         await test.start();
     });
 

@@ -8,11 +8,10 @@ import FullStackedVersion from "fullstacked/version";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-describe("Default Template Tests", function(){
+describe("Web Components Template Tests", function(){
     let test;
     before(async function(){
         test = new TestE2E(path.resolve(__dirname, ".."));
-        this.timeout(await test.init());
         await test.start();
     });
 

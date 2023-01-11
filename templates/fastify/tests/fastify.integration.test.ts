@@ -4,11 +4,11 @@ import Server from "fullstacked/server";
 import {equal, ok} from "assert";
 import {fetch} from "fullstacked/utils/fetch";
 
-import start from "../server/fastify.server";
+import "../server/fastify.server";
 
 testIntegration(describe("Fastify Template Integration Tests", function() {
     before(() => {
-        start();
+        Server.start();
     });
 
     it("Should hit /hello-fastify endpoint", async () => {

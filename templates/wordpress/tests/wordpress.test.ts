@@ -15,7 +15,7 @@ describe("WordPress Template Tests", function(){
     });
 
     it('Should get wordpress license', async function(){
-        await test.page.goto(`http://wp.localhost:${test.runner.nodePort}/license.txt`);
+        await test.page.goto(`http://wp.localhost:${test.runCommand.runner.nodePort}/license.txt`);
         const root = await test.page.$("pre");
         const innerHTML = await root.getProperty('innerHTML');
         const value = await innerHTML.jsonValue();
