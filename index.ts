@@ -34,7 +34,9 @@ const addTemplate = (template: string, directories: string[] = []) => {
     const basePath = resolve(templatePath, ...directories);
     const content = fs.readdirSync(basePath);
     content.forEach(item => {
-        const itemPath = resolve(basePath, item)
+        const itemPath = resolve(basePath, item);
+
+        const fixedPath = itemPath.replace(templatePath, outDir) ;
 
         if(item === "dependencies.json"){
             const dependencies = JSON.parse(fs.readFileSync(itemPath, {encoding: "utf-8"}));
@@ -51,13 +53,17 @@ const addTemplate = (template: string, directories: string[] = []) => {
                 Object.keys(dependencies.native).forEach(dependency => nativePackages[dependency] = dependencies.native[dependency]);
             }
 
+            if(dependencies.files){
+                dependencies.files.forEach(item => {
+                    fs.cpSync(resolve(templatePath, item), resolve(dirname(fixedPath), item), {recursive: true});
+                })
+            }
+
             return;
         }
 
 
         const isDir = fs.lstatSync(itemPath).isDirectory();
-
-        const fixedPath = itemPath.replace(templatePath, outDir) ;
 
         if(!isDir) return fs.copyFileSync(itemPath, fixedPath);
 
