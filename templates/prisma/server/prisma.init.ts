@@ -7,7 +7,7 @@ async function prismaHealthCheck(){
     await client.$disconnect();
 }
 
-export async function maybeInitPrisma(silent: boolean){
+export async function maybeInitPrisma(silent: boolean = false){
     try{
         await prismaHealthCheck();
     }catch (e) {
