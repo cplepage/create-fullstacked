@@ -15,10 +15,10 @@ describe("React Template Tests", function(){
     });
 
     it('Should get the react template quote', async function(){
-        const root = await test.page.$("p");
+        const root = await test.page.$("#react-root");
         const innerHTML = await root.getProperty('innerHTML');
         const value = await innerHTML.jsonValue();
-        equal(value, "You are using the React template");
+        equal(value, "Hello from React");
     });
 
     after(function(){

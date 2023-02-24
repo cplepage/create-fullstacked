@@ -1,5 +1,5 @@
-import Server from "fullstacked/server";
 import express from "express"
+import expressRegister from "./express.register";
 
 const app = express();
 
@@ -7,9 +7,4 @@ app.get("/hello-express", (req, res) => {
     res.send("Hello from express");
 });
 
-const { promisifiedListener, resolver } = Server.promisify(app);
-
-// express bottoms out here
-app.use(resolver);
-
-Server.addListener(promisifiedListener);
+expressRegister(app);

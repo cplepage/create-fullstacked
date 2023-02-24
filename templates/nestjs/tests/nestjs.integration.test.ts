@@ -26,10 +26,12 @@ testIntegration(describe("NestJS Template Integration Tests", function() {
     });
 
     it("Should pass through nestjs", async () => {
-        Server.addListener((req, res) => {
-            res.writeHead(200);
-            res.end("1");
-        })
+        Server.listeners.push({
+            handler(req, res) {
+                res.writeHead(200);
+                res.end("1");
+            }
+        });
         ok(await fetch.get("http://localhost/"));
     });
 

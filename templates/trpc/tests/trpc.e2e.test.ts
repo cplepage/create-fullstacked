@@ -7,22 +7,21 @@ import {fileURLToPath} from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-describe("Default Template Tests", function(){
+describe("tRPC Template e2e Tests", function(){
     let test;
     before(async function(){
         test = new TestE2E(path.resolve(__dirname, ".."));
-        this.timeout(await test.init());
         await test.start();
     });
 
-    it('Should display main title', async function(){
-        const root = await test.page.$("h1");
+    it('Should get hello from tRPC', async function(){
+        const root = await test.page.$("#hello-from-trpc");
         const innerHTML = await root.getProperty('innerHTML');
         const value = await innerHTML.jsonValue();
-        equal(value, "Welcome to FullStacked!");
+        equal(value, "Hello from tRPC");
     });
 
-    after(async function(){
-        await test.stop();
+    after(function(){
+        test.stop();
     });
 });

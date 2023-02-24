@@ -1,11 +1,7 @@
 import testIntegration from "fullstacked/utils/testIntegration";
 import {describe, it} from "mocha";
 import SQLite3 from "../server/sqlite3";
-import {dirname, resolve} from "path";
-import {fileURLToPath} from "url";
 import {deepEqual} from "assert";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 testIntegration(describe("SQLite3 Template Tests", function(){
 
