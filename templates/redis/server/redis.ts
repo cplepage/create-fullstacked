@@ -8,6 +8,6 @@ export default class Redis {
     }
 
     static close(){
-        return this.client.quit()
+        return this.client.quit();
     }
 }
